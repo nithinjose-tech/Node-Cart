@@ -5,7 +5,7 @@ exports.getIndex = (req, res, next) => {
     .then(([rows, fieldData]) => {
       res.render("shop/index", {
         prods: rows,
-        pageTitle: "Shop",
+        pageTitle: "Sponsers",
         path: "/",
       });
     })

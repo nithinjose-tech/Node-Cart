@@ -2,22 +2,31 @@ const Product = require("../models/product");
 
 exports.getAddProduct = (req, res, next) => {
   res.render("admin/add-product", {
-    pageTitle: "Add Product",
+    pageTitle: "Add Sponsers",
     path: "/admin/add-product",
-    editing: false,
   });
 };
 
 exports.postAddProduct = (req, res, next) => {
   const title = req.body.title;
-  const imageUrl = req.body.imageUrl;
-  const price = req.body.price;
+  const image = req.file;
   const description = req.body.description;
-  const product = new Product(null, title, imageUrl, description, price);
+
+  const imageUrl = image.path;
+
+  console.log(image);
+  const product = new Product(null, title, imageUrl, description);
   product
     .save()
     .then(() => {
       res.redirect("/");
     })
     .catch((err) => console.log(err));
+};
+
+exports.getEditProduct = (req, res, next) => {
+  res.render("admin/edit-product", {
+    pageTitle: "Edit Product",
+    path: "/admin/edit-product",
+  });
 };
